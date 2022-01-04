@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">
     <title>debounce</title>
+    <script src="../utils/vue.js"></script>
     <style>
-    	#container{
+        #container {
             width: 100%;
             height: 200px;
             line-height: 200px;
@@ -14,17 +15,47 @@
             color: #fff;
             background-color: #444;
             font-size: 30px;
-    	}
+        }
     </style>
 </head>
 
 <body>
-	<div id="container"></div>
-    <button id="button">点击取消debounce</button>
+    <input type="text" placeholder="请输入用户名" id="username">
+    <div id="app">
+        <input type='text' v-model='inputVal' @keyup="hangleChange">
+    </div>
+    <div id="container"></div>
     <!-- <script src="underscore.js"></script> -->
-    <script src="debounce1.js"></script>
+    <!-- <script src="debounce6.js"></script> -->
 </body>
+<script>
+    var timer
+    var $username = document.getElementById("username")
+    $username.addEventListener('input', debounce, false)
+    function debounce() {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            console.log('请求接口=>',);
+        }, 1000)
+    }
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            inputVal: ''
+        },
+        methods: {
+            hangleChange() {
+                this.debounce()
+            },
+            debounce() {
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    console.log('请求接口123=>',);
+                }, 1000)
+            }
+        }
+    })
+</script>
 
 </html>
-
-
